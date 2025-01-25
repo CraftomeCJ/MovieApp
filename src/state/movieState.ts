@@ -1,11 +1,17 @@
 import { atom, selector } from 'recoil';
+import { Movie } from '../types/movie-type';
 
-export const moviesState = atom({
+interface MoviesState {
+  upcoming: Movie[];
+  popular: Movie[];
+}
+
+export const moviesState = atom<MoviesState>({
   key: 'moviesState',
-  default: [],
+  default: { upcoming: [], popular: [] },
 });
 
-export const favoritesState = atom({
+export const favoritesState = atom<number[]>({
   key: 'favoritesState',
   default: [],
 });

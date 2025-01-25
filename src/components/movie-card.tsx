@@ -1,7 +1,6 @@
 import React from 'react';
-import { View, Text, TouchableOpacity, StyleSheet, Image } from 'react-native';
-import { Movie } from '../types/movie-type';
-
+import { TouchableOpacity, View, Text, Image, StyleSheet } from 'react-native';
+import type { Movie } from '../types/movie-type';
 
 interface MovieCardProps {
   movie: Movie;
@@ -9,26 +8,61 @@ interface MovieCardProps {
   onToggleFavorite: () => void;
 }
 
-const MovieCard: React.FC<MovieCardProps> = ({ movie, isFavorite, onToggleFavorite }) => {
-  return (
-    <View style={styles.card}>
-      <Image
-        source={{ uri: `https://image.tmdb.org/t/p/w500${movie.poster_path}` }}
-        style={styles.poster}
-      />
-      <Text style={styles.title}>{movie.title}</Text>
-      <TouchableOpacity onPress={onToggleFavorite} style={styles.favoriteButton}>
-        <Text>{isFavorite ? '❤️' : '🤍'}</Text>
-      </TouchableOpacity>
+const MovieCard: React.FC<MovieCardProps> = ({ movie, isFavorite, onToggleFavorite }) => (
+  <TouchableOpacity style={styles.card}>
+    <Image
+      source={{ uri: `https://image.tmdb.org/t/p/w200${movie.poster_path}` }}
+      style={styles.poster}
+      resizeMode="cover"
+    />
+    <View style={styles.info}>
+      <Text style={styles.title} numberOfLines={2}>{movie.title}</Text>
+      <Text style={styles.date}>{new Date(movie.release_date).getFullYear()}</Text>
     </View>
-  );
-};
+    <TouchableOpacity
+      onPress={onToggleFavorite}
+      style={styles.favoriteButton}
+    >
+      <Text style={styles.favoriteIcon}>{isFavorite ? '❤️' : '🤍'}</Text>
+    </TouchableOpacity>
+  </TouchableOpacity>
+);
 
 const styles = StyleSheet.create({
-  card: { marginBottom: 16, alignItems: 'center' },
-  poster: { width: 150, height: 200, borderRadius: 8 },
-  title: { fontSize: 16, marginTop: 8 },
-  favoriteButton: { marginTop: 8 },
+  card: {
+    width: 150,
+    marginRight: 16,
+    backgroundColor: '#fff',
+    borderRadius: 8,
+    overflow: 'hidden',
+    elevation: 2,
+  },
+  poster: {
+    width: '100%',
+    height: 200,
+  },
+  info: {
+    padding: 8,
+  },
+  title: {
+    fontWeight: '600',
+    fontSize: 14,
+  },
+  date: {
+    fontSize: 12,
+    color: '#666',
+  },
+  favoriteButton: {
+    position: 'absolute',
+    top: 8,
+    right: 8,
+    backgroundColor: 'rgba(255,255,255,0.9)',
+    borderRadius: 16,
+    padding: 4,
+  },
+  favoriteIcon: {
+    fontSize: 20,
+  },
 });
 
 export default MovieCard;
