@@ -5,6 +5,7 @@ import { moviesState, favoritesState } from '../state/movieState';
 import MovieCard from '../components/movie-card';
 import type { Movie } from '../types/movie-type';
 import { useMovies } from '../../hooks/useGetMovies';
+import withApiState from '../../helpers/with-api-state';
 
 const HomeScreen: React.FC = () => {
   const [favorites, setFavorites] = useRecoilState(favoritesState);
