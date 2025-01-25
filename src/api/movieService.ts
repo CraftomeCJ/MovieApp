@@ -1,6 +1,6 @@
 import axios from 'axios';
 import Config from 'react-native-config';
-import { Movie, MovieDetails } from '../types/type';
+import { Movie, MovieDetails } from '../types/movie-type';
 
 const API_KEY = Config.TMDB_API_KEY; // Access API key from .env
 const BASE_URL = 'https://api.themoviedb.org/3';
