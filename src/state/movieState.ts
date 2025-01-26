@@ -1,5 +1,6 @@
 import { atom, selector } from 'recoil';
 import { Movie } from '../types/movie-type';
+import { AsyncStorage } from 'react-native';
 
 interface MoviesState {
   upcoming: Movie[];
@@ -13,5 +14,11 @@ export const moviesState = atom<MoviesState>({
 
 export const favoritesState = atom<number[]>({
   key: 'favoritesState',
-  default: [],
+  default: selector({
+    key: 'favoritesState/initial',
+    get: async () => {
+      const data = await AsyncStorage.getItem('favorites');
+      return data ? JSON.parse(data) : [];
+    },
+  }),
 });
