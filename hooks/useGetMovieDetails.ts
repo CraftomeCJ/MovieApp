@@ -50,13 +50,15 @@ export const useGetMovieDetails = (movieId: number) => {
 				? prev.filter((id) => id !== movieId)
 				: [...prev, movieId],
 		);
-		// Persist favorites
-		AsyncStorage.setItem('favorites', JSON.stringify(favorites));
 	};
 
 	useEffect(() => {
 		loadDetails();
 	}, [movieId]);
+
+	useEffect(() => {
+    AsyncStorage.setItem('favorites', JSON.stringify(favorites));
+  }, [favorites]);
 
 	return {
 		movieDetails,
