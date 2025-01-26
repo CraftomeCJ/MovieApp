@@ -1,14 +1,8 @@
 import axios from 'axios';
-import Config from 'react-native-config';
 import { Movie, MovieDetails } from '../types/movie-type';
 
-// const API_KEY = Config.TMDB_API_KEY; // Access from .env
 const API_KEY = '77545170d233541d9c56f99a85dcc14c';
-// const BASE_URL = process.env['TMDB_BASE_URL']
 const BASE_URL = 'https://api.themoviedb.org/3';
-
-console.log('TMDB_API_KEY:', Config.TMDB_API_KEY);
-console.log('TMDB_BASE_URL:', Config.TMDB_BASE_URL);
 
 export const fetchUpcomingMovies = async (): Promise<Movie[]> => {
 	try {
