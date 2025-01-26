@@ -50,7 +50,7 @@ const HomeScreen: React.FC<ApiState> = ({ loading, error, refresh }) => {
   if (error) {
     return (
       <View style={styles.container}>
-        <Text style={styles.errorText}>Error: {error}</Text>
+        <Text style={styles.errorText}>Error: {error.message}</Text>
         <Button title="Retry" onPress={refresh} />
       </View>
     );
