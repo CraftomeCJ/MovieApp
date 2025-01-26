@@ -7,11 +7,18 @@ import {
 	StyleSheet,
 } from 'react-native';
 import type { Movie } from '../types/movie-type';
+import { StackNavigationProp } from '@react-navigation/stack';
+import { RootStackParamList } from '../types/navigation';
+import { useNavigation } from '@react-navigation/native';
 
+type NavigationProp = StackNavigationProp<
+	RootStackParamList,
+	'MOVIE_DETAILS'
+>;
 interface MovieCardProps {
-  movie: Movie;
-  isFavorite: boolean;
-  onToggleFavorite: () => void;
+	movie: Movie;
+	isFavorite: boolean;
+	onToggleFavorite: () => void;
 }
 
 const MovieCard: React.FC<MovieCardProps> = ({
