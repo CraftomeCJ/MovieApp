@@ -7,6 +7,7 @@ import {
 	StyleSheet,
 	ActivityIndicator,
 	TouchableOpacity,
+	SafeAreaView,
 } from 'react-native';
 import { useGetMovieDetails } from '../../hooks/useGetMovieDetails';
 import Icon from 'react-native-vector-icons/MaterialIcons';
@@ -57,6 +58,7 @@ const MovieDetailScreen: React.FC<MovieDetailProps> = ({
 	}
 
 	return (
+		<SafeAreaView style={styles.safeArea}>
 		<ScrollView contentContainerStyle={styles.container}>
 			<Image
 				source={{
@@ -107,10 +109,15 @@ const MovieDetailScreen: React.FC<MovieDetailProps> = ({
 				))}
 			</View>
 		</ScrollView>
+		</SafeAreaView>
 	);
 };
 
 const styles = StyleSheet.create({
+	safeArea: {
+		flex: 1,
+		paddingVertical: 20,
+	},
 	container: {
 		padding: 16,
 	},

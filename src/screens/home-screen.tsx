@@ -81,6 +81,7 @@ const HomeScreen: React.FC = () => {
 const styles = StyleSheet.create({
 	safeArea: {
 		flex: 1,
+		paddingVertical: 20,
 	},
 	container: { flex: 1, padding: 16 },
 	section: { marginVertical: 12 },
