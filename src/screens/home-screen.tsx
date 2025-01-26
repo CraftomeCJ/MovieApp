@@ -6,9 +6,9 @@ import MovieCard from '../components/movie-card';
 import type { Movie } from '../types/movie-type';
 import { useMovies } from '../../hooks/useGetMovies';
 
-const HomeScreen: React.FC<ApiState> = ({ loading, error, refresh }) => {
-  const [favorites, setFavorites] = useRecoilState(favoritesState);
-  const { movies } = useMovies();
+const HomeScreen: React.FC = () => {
+	const [favorites, setFavorites] = useRecoilState(favoritesState);
+	const { movies, loading, error, refresh } = useMovies();
 
   const toggleFavorite = (movieId: number) => {
     setFavorites(prev =>
@@ -84,4 +84,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default withApiState(HomeScreen);
+export default HomeScreen;
