@@ -5,8 +5,8 @@ import { useRecoilState } from 'recoil';
 import {
 	fetchPopularMovies,
 	fetchUpcomingMovies,
-} from '../src/api/movieService';
-import { moviesState } from '../src/state/movieState';
+} from '../api/movieService';
+import { moviesState } from '../state/movieState';
 
 export const useMovies = () => {
 	const [movies, setMovies] = useRecoilState(moviesState);

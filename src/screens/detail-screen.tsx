@@ -9,7 +9,7 @@ import {
 	TouchableOpacity,
 	SafeAreaView,
 } from 'react-native';
-import { useGetMovieDetails } from '../../hooks/useGetMovieDetails';
+import { useGetMovieDetails } from '../hooks/useGetMovieDetails';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import { RouteProp } from '@react-navigation/native';
 import { StackNavigationProp } from '@react-navigation/stack';

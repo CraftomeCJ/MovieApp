@@ -3,9 +3,9 @@ import { useRecoilState } from 'recoil';
 
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import NetInfo from '@react-native-community/netinfo';
-import { fetchMovieDetails } from '../src/api/movieService';
-import { favoritesState } from '../src/state/movieState';
-import { MovieDetails } from '../src/types/movie-type';
+import { fetchMovieDetails } from '../api/movieService';
+import { favoritesState } from '../state/movieState';
+import { MovieDetails } from '../types/movie-type';
 
 export const useGetMovieDetails = (movieId: number) => {
 	const [movieDetails, setMovieDetails] =

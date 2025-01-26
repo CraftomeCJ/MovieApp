@@ -12,7 +12,7 @@ import { useRecoilState } from 'recoil';
 import { favoritesState } from '../state/movieState';
 import MovieCard from '../components/movie-card';
 import type { Movie } from '../types/movie-type';
-import { useMovies } from '../../hooks/useGetMovies';
+import { useMovies } from '../hooks/useGetMovies';
 
 const HomeScreen: React.FC = () => {
 	const [favorites, setFavorites] = useRecoilState(favoritesState);
