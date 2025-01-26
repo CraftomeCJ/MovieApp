@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useRecoilState } from 'recoil';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {
@@ -9,9 +9,13 @@ import { moviesState } from '../src/state/movieState';
 
 export const useMovies = () => {
 	const [movies, setMovies] = useRecoilState(moviesState);
+	const [loading, setLoading] = useState<boolean>(false);
+	const [error, setError] = useState<string | null>(null);
 	const CACHE_KEY = 'movies_cache';
 
 	const loadMovies = async () => {
+		setLoading(true);
+		setError(null);
 		try {
 			// Offline-first: Load cached data first
 			const cachedData = await AsyncStorage.getItem(CACHE_KEY);
@@ -31,7 +35,9 @@ export const useMovies = () => {
 			);
 		} catch (error) {
 			console.error('Failed to load movies:', error);
-			throw error;
+			setError('Failed to load movies');
+		} finally {
+			setLoading(false);
 		}
 	};
 
@@ -39,5 +45,5 @@ export const useMovies = () => {
 		loadMovies();
 	}, []);
 
-	return { movies, refresh: loadMovies };
+	return { movies, loading, error, refresh: loadMovies };
 };

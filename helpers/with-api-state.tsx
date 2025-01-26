@@ -1,16 +1,11 @@
 import React from 'react';
 import { ActivityIndicator, View, Text, StyleSheet, Button } from 'react-native';
-
-type ApiStateProps = {
-  loading: boolean;
-  error: Error | null;
-  refresh: () => Promise<void>;
-};
+import { ApiState } from '../src/types/api-types';
 
 const withApiState = <P extends object>(
   WrappedComponent: React.ComponentType<P>
 ) => {
-  const WithApiState: React.FC<P & ApiStateProps> = (props) => {
+  const WithApiState: React.FC<P & ApiState> = (props) => {
     const { loading, error, refresh, ...rest } = props;
 
     if (error) {

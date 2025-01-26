@@ -1,15 +1,16 @@
 import React from 'react';
-import { View, Text, FlatList, StyleSheet } from 'react-native';
+import { View, Text, FlatList, StyleSheet, ActivityIndicator, Button } from 'react-native';
 import { useRecoilState } from 'recoil';
 import { moviesState, favoritesState } from '../state/movieState';
 import MovieCard from '../components/movie-card';
 import type { Movie } from '../types/movie-type';
 import { useMovies } from '../../hooks/useGetMovies';
 import withApiState from '../../helpers/with-api-state';
+import { ApiState } from '../types/api-types';
 
-const HomeScreen: React.FC = () => {
+const HomeScreen: React.FC<ApiState> = ({ loading, error, refresh }) => {
   const [favorites, setFavorites] = useRecoilState(favoritesState);
-  const { movies, refresh } = useMovies();
+  const { movies } = useMovies();
 
   const toggleFavorite = (movieId: number) => {
     setFavorites(prev =>
@@ -38,6 +39,23 @@ const HomeScreen: React.FC = () => {
     </View>
   );
 
+  if (loading) {
+    return (
+      <View style={styles.container}>
+        <ActivityIndicator size="large" color="#0000ff" />
+      </View>
+    );
+  }
+
+  if (error) {
+    return (
+      <View style={styles.container}>
+        <Text style={styles.errorText}>Error: {error.message}</Text>
+        <Button title="Retry" onPress={refresh} />
+      </View>
+    );
+  }
+
   return (
     <View style={styles.container}>
       {renderSection('Upcoming Movies', movies.upcoming)}
@@ -56,7 +74,11 @@ const styles = StyleSheet.create({
     paddingHorizontal: 16,
   },
   listContent: { paddingHorizontal: 16 },
+  errorText: {
+    color: 'red',
+    marginBottom: 10,
+    textAlign: 'center',
+  },
 });
 
-// Wrap with API state HOC
 export default withApiState(HomeScreen);
