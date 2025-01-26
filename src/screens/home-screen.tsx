@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, FlatList, StyleSheet, ActivityIndicator, Button } from 'react-native';
+import { View, Text, FlatList, StyleSheet, ActivityIndicator, Button, SafeAreaView } from 'react-native';
 import { useRecoilState } from 'recoil';
 import { moviesState, favoritesState } from '../state/movieState';
 import MovieCard from '../components/movie-card';
@@ -50,21 +50,26 @@ const HomeScreen: React.FC<ApiState> = ({ loading, error, refresh }) => {
   if (error) {
     return (
       <View style={styles.container}>
-        <Text style={styles.errorText}>Error: {error.message}</Text>
+        <Text style={styles.errorText}>Error: {error}</Text>
         <Button title="Retry" onPress={refresh} />
       </View>
     );
   }
 
   return (
+    <SafeAreaView style={styles.safeArea}>
     <View style={styles.container}>
       {renderSection('Upcoming Movies', movies.upcoming)}
       {renderSection('Popular Movies', movies.popular)}
     </View>
+    </SafeAreaView>
   );
 };
 
 const styles = StyleSheet.create({
+  safeArea: {
+    flex: 1,
+  },
   container: { flex: 1, padding: 16 },
   section: { marginVertical: 12 },
   sectionTitle: {
