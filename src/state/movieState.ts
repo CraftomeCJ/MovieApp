@@ -1,6 +1,6 @@
 import { atom, selector } from 'recoil';
 import { Movie } from '../types/movie-type';
-import { AsyncStorage } from 'react-native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 interface MoviesState {
   upcoming: Movie[];
