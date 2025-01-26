@@ -1,11 +1,10 @@
 import { createStackNavigator } from '@react-navigation/stack';
 import React from 'react';
 import HomeScreen from '../screens/home-screen';
-import withApiState from '../../helpers/with-api-state';
+import MovieDetailScreen from '../screens/detail-screen';
 import { RootStackParamList } from '../types/navigation';
 
 const Stack = createStackNavigator<RootStackParamList>();
-const HomeScreenWithApiState = withApiState(HomeScreen);
 
 const AppNavigator = () => (
 	<Stack.Navigator
@@ -16,9 +15,12 @@ const AppNavigator = () => (
 	>
 		<Stack.Screen
 			name='HOME'
-			component={HomeScreenWithApiState}
+			component={HomeScreen}
 		/>
-		{/* <Stack.Screen name="MovieDetail" component={MovieDetailScreen} /> */}
+		<Stack.Screen
+			name='MOVIE_DETAILS'
+			component={MovieDetailScreen}
+		/>
 	</Stack.Navigator>
 );
 
