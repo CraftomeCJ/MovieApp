@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { useRecoilState } from 'recoil';
 
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import NetInfo from '@react-native-community/netinfo';
 import { fetchMovieDetails } from '../src/api/movieService';
 import { favoritesState } from '../src/state/movieState';
 import { MovieDetails } from '../src/types/movie-type';
@@ -21,6 +22,15 @@ export const useGetMovieDetails = (movieId: number) => {
 			const cachedData = await AsyncStorage.getItem(CACHE_KEY);
 			if (cachedData) {
 				setMovieDetails(JSON.parse(cachedData));
+			}
+
+			// Check network status FIRST
+			const networkState = await NetInfo.fetch();
+			const isConnected = networkState.isConnected ?? false;
+
+			if (!isConnected) {
+				setError(new Error('Offline - showing cached data'));
+				return;
 			}
 
 			// Fetch fresh data
