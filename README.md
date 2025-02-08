@@ -67,11 +67,11 @@ src/
 - **Description**: Encapsulates reusable logic for API calls, including Axios configuration and error handling.
 - **Key Features**:
   - Centralized Axios instance with environment-specific configuration.
-  - Generic `get` function for reusable GET requests.
+  - Generic `fetchMovieData` function for reusable GET requests.
   - Centralized error handling for consistent logging.
 - **Example**:
   ```typescript
-  export const get = async <T>(endpoint: string): Promise<T> => {
+  export const fetchMovieData = async <T>(endpoint: string): Promise<T> => {
     try {
       const response = await axiosInstance.get<T>(endpoint);
       return response.data;
